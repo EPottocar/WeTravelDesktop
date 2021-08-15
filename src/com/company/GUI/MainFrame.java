@@ -6,15 +6,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MainFrame extends JFrame {
+
+    private JPanel MainFrame;
     private JButton homeButton;
-    private JButton cittàButton;
     private JButton utenteButton;
+    private JButton cittàButton1;
+    private JTextField benvenutoInWeTravelTextField;
+
     public MainFrame(){
 
-
+        setContentPane(MainFrame);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setSize(600, 400);
         setVisible(true);
+        setSize(1000,600);
 
 
     }
