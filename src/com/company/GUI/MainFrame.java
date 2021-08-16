@@ -1,20 +1,25 @@
 package com.company.GUI;
 
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MainFrame extends JFrame {
 
+
+public class MainFrame extends JFrame {
     private JPanel MainFrame;
     private JButton homeButton;
-    private JButton utenteButton;
-    private JButton cittàButton1;
-    private JTextField benvenutoInWeTravelTextField;
+    private JButton impostazioniButton;
+    private JTextField BENVENUTOINWETRAVELTextField;
+    private JPanel Frame;
+    private JButton Città;
+    private JButton utenteButton1;
 
-    public MainFrame(){
 
+    public MainFrame() {
+        super("WeTravel");
         setContentPane(MainFrame);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
@@ -22,5 +27,4 @@ public class MainFrame extends JFrame {
 
 
     }
-
 }
