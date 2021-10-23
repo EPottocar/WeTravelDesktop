@@ -1,6 +1,5 @@
 package com.company.GUI;
 
-import java.awt.Image;;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
