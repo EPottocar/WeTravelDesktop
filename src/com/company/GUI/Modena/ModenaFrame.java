@@ -1,12 +1,14 @@
-package com.company.GUI;
+package com.company.GUI.Modena;
 
 import javax.swing.*;
 
 import com.company.Database;
+import com.company.GUI.CitiesFrame;
+import com.company.GUI.SettingsFrame;
 
 
 public class ModenaFrame extends JFrame{
-    Database DB = new Database("Modena", "Città", "GenDescript");
+    Database DB = new Database("Città", "Modena", "GenDescript");
     String Text;
     private JPanel Modena;
     private JLabel Image;
@@ -29,7 +31,21 @@ public class ModenaFrame extends JFrame{
             SwingUtilities.invokeLater(CitiesFrame::new);
         });
         Attrazioni.addActionListener(e -> {
+            String[] opzioni = {"Duomo", "Ghirlandina", "Palazzo Ducale"};
+
+            String s = (String) JOptionPane.showInputDialog(this, "Scegli attrazione",
+                    "Selezione", JOptionPane.PLAIN_MESSAGE, null, opzioni, "Seleziona"
+            );;
+            if (s == "Duomo") {
+                setVisible(false);
+                SwingUtilities.invokeLater(DuomoFrame::new);
+            }
+
+
+        });
+        impostazioniButton.addActionListener(e -> {
             setVisible(false);
+            SwingUtilities.invokeLater(SettingsFrame::new);
         });
     }
 

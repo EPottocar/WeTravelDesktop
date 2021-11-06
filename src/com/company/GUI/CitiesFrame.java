@@ -1,8 +1,8 @@
 package com.company.GUI;
 
+import com.company.GUI.Modena.ModenaFrame;
+
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class CitiesFrame extends JFrame{
     private JPanel CitiesFrame;
