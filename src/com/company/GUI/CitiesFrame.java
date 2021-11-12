@@ -1,16 +1,23 @@
 package com.company.GUI;
 
-import com.company.GUI.Modena.ModenaFrame;
-
 import javax.swing.*;
 
 public class CitiesFrame extends JFrame{
     private JPanel CitiesFrame;
     private JButton Città1;
     private JButton Città2;
+    private JMenuItem Indietro;
+    private JMenu Menu;
+    private JMenuBar Barra;
 
     public CitiesFrame() {
         super("WeTravel");
+        Indietro = new JMenuItem("Indietro");
+        JMenu Menu = new JMenu("Menu");
+        Menu.add(Indietro);
+        JMenuBar Barra = new JMenuBar();
+        Barra.add(Menu);
+        setJMenuBar(Barra);
         setContentPane(CitiesFrame);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
@@ -22,6 +29,10 @@ public class CitiesFrame extends JFrame{
         });
         Città2.addActionListener(e -> {
             setVisible(false);
+        });
+        Indietro.addActionListener(e -> {
+            setVisible(false);
+            SwingUtilities.invokeLater(MainFrame::new);
         });
     }
 
