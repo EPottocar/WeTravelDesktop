@@ -1,6 +1,8 @@
 package com.company.GUI;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class CitiesFrame extends JFrame{
     private JPanel CitiesFrame;
@@ -15,13 +17,14 @@ public class CitiesFrame extends JFrame{
         Indietro = new JMenuItem("Indietro");
         JMenu Menu = new JMenu("Menu");
         Menu.add(Indietro);
-        JMenuBar Barra = new JMenuBar();
+        Barra = new JMenuBar();
         Barra.add(Menu);
         setJMenuBar(Barra);
         setContentPane(CitiesFrame);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
         setSize(1500, 800);
+
 
         Città1.addActionListener(e -> {
             setVisible(false);
