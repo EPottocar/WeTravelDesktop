@@ -38,5 +38,4 @@ public class CitiesFrame extends JFrame{
             SwingUtilities.invokeLater(MainFrame::new);
         });
     }
-
 }

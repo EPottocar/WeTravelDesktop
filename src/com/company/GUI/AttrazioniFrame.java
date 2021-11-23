@@ -54,5 +54,4 @@ public class AttrazioniFrame extends JFrame{
             SwingUtilities.invokeLater(SettingsFrame::new);
         });
     }
-
 }

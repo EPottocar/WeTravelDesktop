@@ -50,7 +50,7 @@ public class LOGIN extends JFrame implements ActionListener {
             String user = User.getText();
             String pass = PASSWORD.getText();
             if (user.equals("Admin") && pass.equals("EdoardoBaha")) {
-                String[] opzioni = {"Modifica Attrazione", "Aggiungi Attrazione", "Modifica Città", "Aggiungi Città"};
+                String[] opzioni = {"Modifica Attrazione", "Aggiungi Attrazione", "Modifica Città", "Aggiungi Città", "Cancella Attrazione", "Cancella Città"};
 
                 s = (String) JOptionPane.showInputDialog(this, "Scegli azione",
                         "Selezione", JOptionPane.PLAIN_MESSAGE, null, opzioni, "Seleziona");
@@ -66,8 +66,5 @@ public class LOGIN extends JFrame implements ActionListener {
             }
 
         }
-
-
     }
 }
-

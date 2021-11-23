@@ -4,7 +4,6 @@ import javax.swing.*;
 
 import com.company.Database;
 
-
 public class ModenaFrame extends JFrame{
     String s;
     Database DB = new Database("Città", "Modena", "GenDescript");
@@ -45,5 +44,4 @@ public class ModenaFrame extends JFrame{
             SwingUtilities.invokeLater(SettingsFrame::new);
         });
     }
-
 }
