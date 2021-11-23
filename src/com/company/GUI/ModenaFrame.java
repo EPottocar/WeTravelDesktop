@@ -29,7 +29,8 @@ public class ModenaFrame extends JFrame{
             SwingUtilities.invokeLater(CitiesFrame::new);
         });
         Attrazioni.addActionListener(e -> {
-            String[] opzioni = {"Duomo", "Ghirlandina", "Palazzo Ducale"};
+            Database DBmain = new Database("Città","Modena","");
+            String[] opzioni = DBmain.GetDBColumns(DBmain);
 
             s = (String) JOptionPane.showInputDialog(this, "Scegli attrazione",
                     "Selezione", JOptionPane.PLAIN_MESSAGE, null, opzioni, "Seleziona"

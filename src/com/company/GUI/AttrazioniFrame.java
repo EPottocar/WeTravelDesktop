@@ -20,19 +20,19 @@ public class AttrazioniFrame extends JFrame{
         Database DB = new Database("Città", "Modena", "" +s);
         Text = DB.GetFromDB(DB);
         Descript.setText(Text);
-        if (s == "Duomo") {
+        if (s.equals("Duomo")) {
             image1 = "/Users/edoardopottocar/IdeaProjects/WeTravelDesktop/out/production/WeTravelDesktop/com/company/Img/Duomo-Facciata.jpeg";
             image2 = "/Users/edoardopottocar/IdeaProjects/WeTravelDesktop/out/production/WeTravelDesktop/com/company/Img/Duomo-interno.jpeg";
             Image1.setIcon(new ImageIcon(image1));
             Image2.setIcon(new ImageIcon(image2));
         }
-        if (s == "Ghirlandina") {
+        if (s.equals("Ghirlandina")) {
             image1 = "/Users/edoardopottocar/IdeaProjects/WeTravelDesktop/out/production/WeTravelDesktop/com/company/Img/ghirlandina.jpeg";
             image2 = "/Users/edoardopottocar/IdeaProjects/WeTravelDesktop/out/production/WeTravelDesktop/com/company/Img/Ghirlandina2.jpeg";
             Image1.setIcon(new ImageIcon(image1));
             Image2.setIcon(new ImageIcon(image2));
         }
-        if (s == "Palazzo Ducale") {
+        if (s.equals("PalazzoDucale")) {
             image1 = "/Users/edoardopottocar/IdeaProjects/WeTravelDesktop/out/production/WeTravelDesktop/com/company/Img/PalazzoDucale.jpeg";
             image2 = "/Users/edoardopottocar/IdeaProjects/WeTravelDesktop/out/production/WeTravelDesktop/com/company/Img/PalazzoDucale-interno.jpeg";
             Image1.setIcon(new ImageIcon(image1));
