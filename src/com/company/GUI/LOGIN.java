@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LOGIN extends JFrame implements ActionListener {
+    public static String Utente;
     private final JTextField User;
     private final JPasswordField PASSWORD;
     private final JButton INVIOButton;
@@ -58,11 +59,12 @@ public class LOGIN extends JFrame implements ActionListener {
                 new DBmanagerFrame(s);
             }
             else{
-                JOptionPane.showMessageDialog(this, "Benvenuto in Wetravel!", "Login Succesful!",
+                Utente = User.getText();
+                JOptionPane.showMessageDialog(this, "" +Utente + " benvenuto in Wetravel!", "Login Succesful!",
                         JOptionPane.INFORMATION_MESSAGE);
 
                 setVisible(false);
-                SwingUtilities.invokeLater(MainFrame::new);
+                new MainFrame();
             }
 
         }

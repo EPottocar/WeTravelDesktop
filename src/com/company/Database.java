@@ -1,6 +1,9 @@
 package com.company;
 
+import com.company.GUI.LOGIN;
+
 import java.sql.*;
+import java.util.ArrayList;
 
 public class Database {
         String query;
@@ -16,6 +19,7 @@ public class Database {
 
         public String GetFromDB(Database DB) {
             String Result = new String();
+            DB.SetActiveDB(DB);
             try {
                 Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/" +getDBname(DB), "root", "ciccio00");
 
@@ -34,7 +38,7 @@ public class Database {
 
         }
         public void UpdateDB(Database DB, String a) {
-
+            DB.SetActiveDB(DB);
             try {
                 Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/" +getDBname(DB), "root", "ciccio00");
 
@@ -56,7 +60,7 @@ public class Database {
         }
 
         public void AddColumnDB(Database DB, String NomeAttr) {
-
+            DB.SetActiveDB(DB);
             try {
                 Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/" +DBname, "root", "ciccio00");
 
@@ -78,6 +82,7 @@ public class Database {
         }
 
          public void AddTableDB(Database DB, String NomeCittà) {
+             DB.SetActiveDB(DB);
              try {
                  Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/" +DBname, "root", "ciccio00");
 
@@ -99,6 +104,7 @@ public class Database {
              return;
         }
     public void CancColumnDB(Database DB) {
+        DB.SetActiveDB(DB);
 
         try {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/" +getDBname(DB), "root", "ciccio00");
@@ -120,7 +126,7 @@ public class Database {
         return;
     }
     public void CancTableDB(Database DB) {
-
+        DB.SetActiveDB(DB);
         try {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/" +getDBname(DB), "root", "ciccio00");
 
@@ -141,6 +147,7 @@ public class Database {
         return;
     }
     public String [] GetDBColumns(Database DB) {
+        DB.SetActiveDB(DB);
         String [] tmp = new String[1];
         try {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/" +getDBname(DB), "root", "ciccio00");
@@ -161,6 +168,117 @@ public class Database {
             throwables.printStackTrace();
         }
         return tmp;
+    }
+
+    public void InsertCommentDB(Database DB, String a) {
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/" +getDBname(DB), "root", "ciccio00");
+
+            Statement statement = connection.createStatement();
+
+            query = "insert into " +getDBtable(DB) + "(" +getDBcolumn(DB) + ") " + "values ('" +a + "')" + ";";
+
+            PreparedStatement preparedStmt = connection.prepareStatement(query);
+
+            preparedStmt.executeUpdate();
+
+            connection.close();
+
+
+        }catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return;
+    }
+
+    public void SetActiveDB(Database DB){
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/" +getDBname(DB), "root", "ciccio00");
+
+            Statement statement = connection.createStatement();
+
+            query = "use " +getDBname(DB) + ";";
+
+            PreparedStatement preparedStmt = connection.prepareStatement(query);
+
+            preparedStmt.executeUpdate();
+
+            connection.close();
+
+
+        }catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return;
+    }
+    public void UpdateCommentDB(Database DB, String a) {
+
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/" +getDBname(DB), "root", "ciccio00");
+
+            Statement statement = connection.createStatement();
+
+            query = "update " +getDBtable(DB) + " set " +getDBcolumn(DB) + "= '" +a + "' " + "where Utenti = '" + LOGIN.Utente + "';";
+            PreparedStatement preparedStmt = connection.prepareStatement(query);
+
+            preparedStmt.executeUpdate();
+
+            connection.close();
+
+
+        }catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return;
+    }
+
+    public ArrayList<String> GetCommentFromDB(Database DB) {
+        ArrayList<String> Commenti = new ArrayList<String>();
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/" +getDBname(DB), "root", "ciccio00");
+
+            Statement statement = connection.createStatement();
+
+            ResultSet resultset = statement.executeQuery("select " +getDBcolumn(DB) + " from " +getDBtable(DB) + ";");
+
+            while (resultset.next()) {
+                Commenti.add(resultset.getString("" +getDBcolumn(DB)));
+            }
+            connection.close();
+
+        }catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return Commenti;
+
+    }
+    public boolean CheckUtenteDB(String Utente){
+            Database DB = new Database("Commenti", "Modena", "Utenti");
+        ArrayList<String> Utenti = new ArrayList<String>();
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/" +getDBname(DB), "root", "ciccio00");
+
+            Statement statement = connection.createStatement();
+
+            ResultSet resultset = statement.executeQuery("select " +getDBcolumn(DB) + " from " +getDBtable(DB) + ";");
+
+            while (resultset.next()) {
+                Utenti.add(resultset.getString("" +getDBcolumn(DB)));
+            }
+            connection.close();
+
+        }catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        for(String a : Utenti){
+            if (a.equals(Utente)){
+                return true;
+            }
+        }
+        return false;
     }
 
     public String getDBname(Database DB) {

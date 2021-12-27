@@ -13,6 +13,7 @@ public class AttrazioniFrame extends JFrame{
     private JButton Impostazioni;
     private JButton Indietro;
     private JLabel Image2;
+    private JButton Commenti;
     private String image2;
 
     public AttrazioniFrame(String s){
@@ -52,6 +53,9 @@ public class AttrazioniFrame extends JFrame{
         Impostazioni.addActionListener(e -> {
             setVisible(false);
             SwingUtilities.invokeLater(SettingsFrame::new);
+        });
+        Commenti.addActionListener(e -> {
+            new CommentiFrame(s);
         });
     }
 }

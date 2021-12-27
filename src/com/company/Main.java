@@ -1,6 +1,7 @@
 package com.company;
 
 import com.company.GUI.AttrazioniFrame;
+import com.company.GUI.CommentiFrame;
 import com.company.GUI.LOGIN;
 import com.company.GUI.ModenaFrame;
 
