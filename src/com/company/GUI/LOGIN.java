@@ -1,5 +1,7 @@
 package com.company.GUI;
 
+import com.company.Database;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -36,8 +38,6 @@ public class LOGIN extends JFrame implements ActionListener {
         p3.add(p1, BorderLayout.NORTH);
         p3.add(p2, BorderLayout.CENTER);
 
-
-        /* JFrame methods called */
         setContentPane(p3);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setSize(600, 400);
@@ -48,9 +48,8 @@ public class LOGIN extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == INVIOButton) {
-            String user = User.getText();
-            String pass = PASSWORD.getText();
-            if (user.equals("Admin") && pass.equals("EdoardoBaha")) {
+            Utente = User.getText();
+            if (User.getText().equals("Admin") && PASSWORD.getText().equals("EdoardoBaha")) {
                 String[] opzioni = {"Modifica Attrazione", "Aggiungi Attrazione", "Modifica Città", "Aggiungi Città", "Cancella Attrazione", "Cancella Città"};
 
                 s = (String) JOptionPane.showInputDialog(this, "Scegli azione",
@@ -59,14 +58,31 @@ public class LOGIN extends JFrame implements ActionListener {
                 new DBmanagerFrame(s);
             }
             else{
-                Utente = User.getText();
-                JOptionPane.showMessageDialog(this, "" +Utente + " benvenuto in Wetravel!", "Login Succesful!",
-                        JOptionPane.INFORMATION_MESSAGE);
-
-                setVisible(false);
-                new MainFrame();
+                Database DB = new Database("Login", "Utenti", "Utenti");
+                Database DB1 = new Database("Login", "Utenti","Password");
+                if (DB.CheckUtenteDB(User.getText(),DB)){ // se l'utente utente è registrato
+                    if (!DB1.CheckPasswordDB(PASSWORD.getText(), DB1)){
+                        JOptionPane.showMessageDialog(this, "Password errata!", "Login Error!",
+                                JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    else{ // se la password è corretta
+                        setVisible(false);
+                        new MainFrame();
+                        JOptionPane.showMessageDialog(this, "" +Utente + " benvenuto in Wetravel!", "Login Succesful!",
+                                JOptionPane.INFORMATION_MESSAGE);
+                    }
+                }
+                else{ // se l'utente non è registrato
+                    DB.InsertUtenteDB(DB, User.getText());
+                    DB1.UpdateCommentDB(DB1, PASSWORD.getText());
+                    JOptionPane.showMessageDialog(this, "Registrazione effettuata con successo" , "Login Succesful!",
+                            JOptionPane.INFORMATION_MESSAGE);
+                    setVisible(false);
+                    new MainFrame();
+                    JOptionPane.showMessageDialog(this, "" +Utente + " benvenuto in Wetravel!", "Login Succesful!",
+                            JOptionPane.INFORMATION_MESSAGE);
+                }
             }
-
         }
     }
 }

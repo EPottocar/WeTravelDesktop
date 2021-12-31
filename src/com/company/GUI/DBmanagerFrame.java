@@ -171,6 +171,8 @@ public class DBmanagerFrame extends JFrame implements ActionListener {
                 DB.AddColumnDB(DB,NomeAttr.getText());
                 DB.setDBcolumn("" +NomeAttr.getText());
                 DB.UpdateDB(DB,Descript.getText());
+                Database DB1 = new Database("Commenti", "" +c, "");
+                DB1.AddColumnDB(DB1,NomeAttr.getText());
             }
             if(a == "Modifica Città"){
                 String c = (String) Città.getSelectedItem();
@@ -182,17 +184,23 @@ public class DBmanagerFrame extends JFrame implements ActionListener {
                 DB.AddTableDB(DB, NomeAttr.getText());
                 DB = new Database("Città", "" +NomeAttr.getText(),"GenDescript");
                 DB.UpdateDB(DB, Descript.getText());
+                Database DB1 = new Database("Commenti", "", "");
+                DB1.AddTableDB(DB1, NomeAttr.getText());
             }
             if(a == "Cancella Attrazione"){
                 String b = (String) Attrazioni.getSelectedItem();
                 String c = (String) Città.getSelectedItem();
                 Database DB = new Database("Città", "" +c, "" +b);
                 DB.CancColumnDB(DB);
+                Database DB1 = new Database("Commenti", "" +c, "" +b);
+                DB1.CancColumnDB(DB1);
             }
             if(a == "Cancella Città"){
                 String c = (String) Città.getSelectedItem();
                 Database DB = new Database("Città", "" +c, "");
                 DB.CancTableDB(DB);
+                Database DB1 = new Database("Commenti", "" +c, "");
+                DB1.CancTableDB(DB1);
             }
         }
         if (e.getSource() == Indietro){

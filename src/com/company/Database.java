@@ -65,8 +65,12 @@ public class Database {
                 Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/" +DBname, "root", "ciccio00");
 
                 Statement statement = connection.createStatement();
-
-                query = "alter table " +getDBtable(DB) + " add " +NomeAttr + " varchar(2000);";
+                if (DB.getDBname(DB).equals("Commenti")){
+                    query = "alter table " +getDBtable(DB) + " add " +NomeAttr + " varchar(500);";
+                }
+                else{
+                    query = "alter table " +getDBtable(DB) + " add " +NomeAttr + " varchar(2000);";
+                }
                 PreparedStatement preparedStmt = connection.prepareStatement(query);
 
                 preparedStmt.executeUpdate();
@@ -87,8 +91,12 @@ public class Database {
                  Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/" +DBname, "root", "ciccio00");
 
                  Statement statement = connection.createStatement();
-
-                 query = "create table " +NomeCittà + " (GenDescript varchar(1000));";
+                 if (DB.getDBname(DB).equals("Commenti")){
+                     query = "create table " +NomeCittà + " (Utenti varchar(20));";
+                 }
+                 else{
+                     query = "create table " +NomeCittà + " (GenDescript varchar(1000));";
+                 }
                  PreparedStatement preparedStmt = connection.prepareStatement(query);
 
 
@@ -170,7 +178,8 @@ public class Database {
         return tmp;
     }
 
-    public void InsertCommentDB(Database DB, String a) {
+    public void InsertUtenteDB(Database DB, String a) {
+        DB.SetActiveDB(DB);
         try {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/" +getDBname(DB), "root", "ciccio00");
 
@@ -214,7 +223,7 @@ public class Database {
         return;
     }
     public void UpdateCommentDB(Database DB, String a) {
-
+        DB.SetActiveDB(DB);
         try {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/" +getDBname(DB), "root", "ciccio00");
 
@@ -236,6 +245,7 @@ public class Database {
     }
 
     public ArrayList<String> GetCommentFromDB(Database DB) {
+        DB.SetActiveDB(DB);
         ArrayList<String> Commenti = new ArrayList<String>();
         try {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/" +getDBname(DB), "root", "ciccio00");
@@ -255,8 +265,8 @@ public class Database {
         return Commenti;
 
     }
-    public boolean CheckUtenteDB(String Utente){
-            Database DB = new Database("Commenti", "Modena", "Utenti");
+    public boolean CheckUtenteDB(String Utente,Database DB){
+        DB.SetActiveDB(DB);
         ArrayList<String> Utenti = new ArrayList<String>();
         try {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/" +getDBname(DB), "root", "ciccio00");
@@ -277,6 +287,29 @@ public class Database {
             if (a.equals(Utente)){
                 return true;
             }
+        }
+        return false;
+    }
+
+    public boolean CheckPasswordDB(String Password,Database DB){
+        DB.SetActiveDB(DB);
+        String Result = new String();
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/" +getDBname(DB), "root", "ciccio00");
+
+            Statement statement = connection.createStatement();
+
+            ResultSet resultset = statement.executeQuery("select " +getDBcolumn(DB) + " from " +getDBtable(DB) + " where Utenti =" + "'" +LOGIN.Utente + "';");
+            while (resultset.next()){
+                Result = resultset.getString("" +getDBcolumn(DB));
+            }
+            connection.close();
+            if (Result.equals(Password)){
+                return true;
+            }
+
+        }catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
         return false;
     }

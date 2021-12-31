@@ -58,12 +58,11 @@ public class CommentiFrame extends JFrame implements ActionListener {
         if (e.getSource() == Invio){
             Database DB1 = new Database("Commenti", "Modena", "Utenti");
             Database DB2 = new Database("Commenti", "Modena", "" +b);
-            DB1.SetActiveDB(DB1);
-            if (DB1.CheckUtenteDB(LOGIN.Utente)){
+            if (DB1.CheckUtenteDB(LOGIN.Utente,DB1)){
                 DB2.UpdateCommentDB(DB2, LOGIN.Utente + ": \n" +AreaScrittura.getText());
             }
             else{
-                DB1.InsertCommentDB(DB1, "" +LOGIN.Utente);
+                DB1.InsertUtenteDB(DB1, "" +LOGIN.Utente);
                 DB2.UpdateCommentDB(DB2, LOGIN.Utente + ": \n" +AreaScrittura.getText());
             }
         }
