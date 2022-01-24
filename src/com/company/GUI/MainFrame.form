@@ -17,6 +17,7 @@
         </constraints>
         <properties>
           <background color="-4501941"/>
+          <foreground color="-4501941"/>
         </properties>
         <border type="none"/>
         <children>
@@ -28,6 +29,7 @@
               <background color="-4501941"/>
               <editable value="false"/>
               <font size="26"/>
+              <foreground color="-4803397"/>
               <horizontalAlignment value="0"/>
               <text value="WETRAVEL"/>
             </properties>

@@ -1,6 +1,7 @@
 package com.company.GUI;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -16,6 +17,18 @@ public class MainFrame extends JFrame {
 
     public MainFrame() {
         super("WeTravel");
+
+        if(SettingsFrame.colore == "notte"){
+            getContentPane().setBackground(Color.black);
+            MainFrame.setBackground(Color.black);
+            Frame.setBackground(Color.black);
+            Newsletter.setBackground(Color.black);
+            WETRAVELTextField.setBackground(Color.black);
+        }
+        if(SettingsFrame.colore == "giorno"){
+            getContentPane().setBackground(Color.white);
+        }
+
         setContentPane(MainFrame);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
@@ -33,7 +46,7 @@ public class MainFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                SwingUtilities.invokeLater(CitiesFrame::new);
+                SwingUtilities.invokeLater(ModenaFrame::new);
             }
         });
         impostazioniButton.addActionListener(new ActionListener() {

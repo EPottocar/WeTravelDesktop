@@ -31,6 +31,9 @@ public class CommentiFrame extends JFrame implements ActionListener {
         ArrayList<String> List = new ArrayList<String>();
         List.addAll(DB.GetCommentFromDB(DB));
         for(String a : List){
+            if (a == null){
+                continue;
+            }
             AreaCommenti.append(a + "\n\n");
         }
         AreaScrittura = new JTextArea();

@@ -4,6 +4,8 @@ import javax.swing.*;
 
 import com.company.Database;
 
+import java.awt.*;
+
 public class ModenaFrame extends JFrame{
     String s;
     Database DB = new Database("Città", "Modena", "GenDescript");
@@ -14,9 +16,25 @@ public class ModenaFrame extends JFrame{
     private JButton impostazioniButton;
     private JTextArea GenDescript;
     private JButton Attrazioni;
+    private JPanel rettangolo;
 
     public ModenaFrame() {
         super("MODENA");
+
+        if(SettingsFrame.colore == "notte"){
+            getContentPane().setBackground(Color.black);
+            GenDescript.setBackground(Color.black);
+            GenDescript.setForeground(Color.white);
+            rettangolo.setBackground(Color.black);
+            Modena.setBackground(Color.black);
+        }
+        if(SettingsFrame.colore == "giorno"){
+            getContentPane().setBackground(Color.white);
+            GenDescript.setBackground(Color.white);
+            GenDescript.setForeground(Color.black);
+            rettangolo.setBackground(Color.white);
+        }
+
         Text = DB.GetFromDB(DB);
         GenDescript.setText(Text);
         setContentPane(Modena);
