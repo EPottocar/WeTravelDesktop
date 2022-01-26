@@ -314,6 +314,27 @@ public class Database {
         return false;
     }
 
+    public String GetSuggerimentiFromDB(Database DB, String Utente) {
+        String Result = new String();
+        DB.SetActiveDB(DB);
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/" +getDBname(DB), "root", "ciccio00");
+
+            Statement statement = connection.createStatement();
+
+            ResultSet resultset = statement.executeQuery("select " +getDBcolumn(DB) + " from " +getDBtable(DB) + " where Utenti = '" +Utente + "';");
+
+            while (resultset.next()){
+                Result = resultset.getString("" +getDBcolumn(DB));
+            }
+            connection.close();
+        }catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return Result;
+
+    }
+
     public String getDBname(Database DB) {
         return DBname;
     }

@@ -15,6 +15,7 @@ public class AttrazioniFrame extends JFrame{
     private JButton Indietro;
     private JLabel Image2;
     private JButton Commenti;
+    private JButton SuggerimentiButton;
     private String image2;
 
     public AttrazioniFrame(String s){
@@ -71,6 +72,9 @@ public class AttrazioniFrame extends JFrame{
         });
         Commenti.addActionListener(e -> {
             new CommentiFrame(s);
+        });
+        SuggerimentiButton.addActionListener(e -> {
+            new SuggerimentiFrame(s);
         });
     }
 }

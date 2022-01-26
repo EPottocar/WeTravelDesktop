@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class DBmanagerFrame extends JFrame implements ActionListener {
     String a;
@@ -24,6 +25,7 @@ public class DBmanagerFrame extends JFrame implements ActionListener {
     private final JButton AggiungiCit;
     private final JButton CancAttr;
     private final JButton CancCit;
+    private final JButton Suggerimenti;
     private final JButton View;
 
     public DBmanagerFrame(String s){
@@ -47,6 +49,8 @@ public class DBmanagerFrame extends JFrame implements ActionListener {
         CancAttr.addActionListener(this);
         CancCit = new JButton("CANCELLA CITTA'");
         CancCit.addActionListener(this);
+        Suggerimenti = new JButton("SUGGERIMENTI");
+        Suggerimenti.addActionListener(this);
         Barra.add(Indietro);
         Barra.add(ModificaAttr);
         Barra.add(AggiungiAttr);
@@ -54,6 +58,7 @@ public class DBmanagerFrame extends JFrame implements ActionListener {
         Barra.add(AggiungiCit);
         Barra.add(CancAttr);
         Barra.add(CancCit);
+        Barra.add(Suggerimenti);
         View = new JButton("VIEW");
         View.addActionListener(this);
 
@@ -150,6 +155,19 @@ public class DBmanagerFrame extends JFrame implements ActionListener {
             p3.add(p1, BorderLayout.CENTER);
             p3.add(p2, BorderLayout.SOUTH);
         }
+        if (s == "Suggerimenti"){
+            a = "Suggerimenti";
+            Suggerimenti.setVisible(false);
+            p1.add(Barra);
+            p1.add(Città);
+            p1.add(Attrazioni);
+
+            p2.add(Descript);
+
+            p3.add(p1,BorderLayout.NORTH);
+            p3.add(p2, BorderLayout.CENTER);
+            p3.add(View, BorderLayout.SOUTH);
+        }
 
         setContentPane(p3);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -173,6 +191,7 @@ public class DBmanagerFrame extends JFrame implements ActionListener {
                 DB.UpdateDB(DB,Descript.getText());
                 Database DB1 = new Database("Commenti", "" +c, "");
                 DB1.AddColumnDB(DB1,NomeAttr.getText());
+                DB1.AddColumnDB(DB1,"Sugg" +NomeAttr.getText());
             }
             if(a == "Modifica Città"){
                 String c = (String) Città.getSelectedItem();
@@ -194,6 +213,8 @@ public class DBmanagerFrame extends JFrame implements ActionListener {
                 DB.CancColumnDB(DB);
                 Database DB1 = new Database("Commenti", "" +c, "" +b);
                 DB1.CancColumnDB(DB1);
+                Database DB2 = new Database("Commenti", "" +c, "Sugg" +b);
+                DB1.CancColumnDB(DB2);
             }
             if(a == "Cancella Città"){
                 String c = (String) Città.getSelectedItem();
@@ -231,11 +252,27 @@ public class DBmanagerFrame extends JFrame implements ActionListener {
             setVisible(false);
             new DBmanagerFrame("Cancella Città");
         }
+        if (e.getSource() == Suggerimenti){
+            setVisible(false);
+            new DBmanagerFrame("Suggerimenti");
+        }
         if (e.getSource() == View){
             if (a == "Modifica Città"){
                 String c = (String) Città.getSelectedItem();
                 Database DB2 = new Database("Città", "" +c, "GenDescript");
                 Descript.setText(DB2.GetFromDB(DB2));
+            }
+            else if (a == "Suggerimenti"){
+                Database DB2 = new Database("Commenti", "" +Città.getSelectedItem(),
+                        "Sugg" +Attrazioni.getSelectedItem());
+                ArrayList<String> List = new ArrayList<String>();
+                List.addAll(DB2.GetCommentFromDB(DB2));
+                for(String a : List){
+                    if (a == null){
+                        continue;
+                    }
+                    Descript.append(a + "\n\n");
+                }
             }
             else {
                 String b = (String) Attrazioni.getSelectedItem();

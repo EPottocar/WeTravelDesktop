@@ -24,7 +24,7 @@ public class SettingsFrame extends JFrame {
         Menu.add(Indietro);
         Giorno = new JButton("Giorno");
         Notte = new JButton("Notte");
-        logout = new JButton("logout");
+        logout = new JButton("Logout");
         JMenuBar Barra = new JMenuBar();
         Barra.add(Menu);
         setJMenuBar(Barra);

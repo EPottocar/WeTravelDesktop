@@ -49,6 +49,19 @@ public class CommentiFrame extends JFrame implements ActionListener {
 
         Panel = new JScrollPane(p3);
 
+        if(SettingsFrame.colore == "notte"){
+            Panel.setBackground(Color.black);
+            p1.setBackground(Color.black);
+            p2.setBackground(Color.black);
+            p3.setBackground(Color.black);
+        }
+        if(SettingsFrame.colore == "giorno") {
+            Panel.setBackground(Color.white);
+            p1.setBackground(Color.white);
+            p2.setBackground(Color.white);
+            p3.setBackground(Color.white);
+        }
+
         setContentPane(Panel);
         setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         setVisible(true);

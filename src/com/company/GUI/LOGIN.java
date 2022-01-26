@@ -49,8 +49,13 @@ public class LOGIN extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == INVIOButton) {
             Utente = User.getText();
-            if (User.getText().equals("Admin") && PASSWORD.getText().equals("EdoardoBaha")) {
-                String[] opzioni = {"Modifica Attrazione", "Aggiungi Attrazione", "Modifica Città", "Aggiungi Città", "Cancella Attrazione", "Cancella Città"};
+            if (User.getText().equals("") || PASSWORD.getText().equals("")){
+                JOptionPane.showMessageDialog(this, "Non hai inserito le credenziali!", "Login Error!",
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
+            else if (User.getText().equals("Admin") && PASSWORD.getText().equals("EdoardoBaha")) {
+                String[] opzioni = {"Modifica Attrazione", "Aggiungi Attrazione", "Modifica Città", "Aggiungi Città",
+                        "Cancella Attrazione", "Cancella Città", "Suggerimenti"};
 
                 s = (String) JOptionPane.showInputDialog(this, "Scegli azione",
                         "Selezione", JOptionPane.PLAIN_MESSAGE, null, opzioni, "Seleziona");
