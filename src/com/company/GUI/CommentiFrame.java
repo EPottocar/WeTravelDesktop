@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class CommentiFrame extends JFrame implements ActionListener {
     private final JScrollPane Panel;
@@ -20,12 +21,31 @@ public class CommentiFrame extends JFrame implements ActionListener {
 
     public CommentiFrame(String s){
         super("Commenti " +s);
-        b = s;
-        Database DB = new Database("Commenti", "Modena", "" +s);
         p1 = new JPanel(new GridLayout(1,1));
         p2 = new JPanel(new GridLayout(2,1));
         p3 = new JPanel(new BorderLayout(1,1));
+        Panel = new JScrollPane(p3);
         AreaCommenti = new JTextArea();
+
+        if(Objects.equals(SettingsFrame.colore, "notte")){
+            Panel.setBackground(Color.black);
+            p1.setBackground(Color.black);
+            p2.setBackground(Color.black);
+            p3.setBackground(Color.black);
+            AreaCommenti.setBackground(Color.black);
+            AreaCommenti.setForeground(Color.white);
+        }
+        if(Objects.equals(SettingsFrame.colore, "giorno")) {
+            Panel.setBackground(Color.white);
+            p1.setBackground(Color.white);
+            p2.setBackground(Color.white);
+            p3.setBackground(Color.white);
+            AreaCommenti.setBackground(Color.white);
+            AreaCommenti.setForeground(Color.black);
+        }
+
+        b = s;
+        Database DB = new Database("Commenti", "Modena", "" +s);
         AreaCommenti.setEditable(false);
         DB.SetActiveDB(DB);
         ArrayList<String> List = new ArrayList<String>();
@@ -46,21 +66,6 @@ public class CommentiFrame extends JFrame implements ActionListener {
 
         p3.add(p1, BorderLayout.CENTER);
         p3.add(p2, BorderLayout.SOUTH);
-
-        Panel = new JScrollPane(p3);
-
-        if(SettingsFrame.colore == "notte"){
-            Panel.setBackground(Color.black);
-            p1.setBackground(Color.black);
-            p2.setBackground(Color.black);
-            p3.setBackground(Color.black);
-        }
-        if(SettingsFrame.colore == "giorno") {
-            Panel.setBackground(Color.white);
-            p1.setBackground(Color.white);
-            p2.setBackground(Color.white);
-            p3.setBackground(Color.white);
-        }
 
         setContentPane(Panel);
         setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);

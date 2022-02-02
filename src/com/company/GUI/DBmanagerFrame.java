@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class DBmanagerFrame extends JFrame implements ActionListener {
     String a;
@@ -74,7 +75,7 @@ public class DBmanagerFrame extends JFrame implements ActionListener {
         Città = new JComboBox(Cit);
         Attrazioni = new JComboBox(Attract);
 
-        if (s == "Modifica Attrazione"){
+        if (Objects.equals(s, "Modifica Attrazione")){
             a = "Modifica Attrazione";
             ModificaAttr.setVisible(false);
             p1.add(Città);
@@ -89,7 +90,7 @@ public class DBmanagerFrame extends JFrame implements ActionListener {
             p3.add(p1, BorderLayout.CENTER);
             p3.add(p2, BorderLayout.SOUTH);;
         }
-        if (s == "Aggiungi Attrazione"){
+        if (Objects.equals(s, "Aggiungi Attrazione")){
             a = "Aggiungi Attrazione";
             AggiungiAttr.setVisible(false);
             p1.add(Città);
@@ -104,7 +105,7 @@ public class DBmanagerFrame extends JFrame implements ActionListener {
             p3.add(p1, BorderLayout.CENTER);
             p3.add(p2, BorderLayout.SOUTH);
         }
-        if (s == "Modifica Città"){
+        if (Objects.equals(s, "Modifica Città")){
             a = "Modifica Città";
             ModificaCit.setVisible(false);
             p1.add(Città);
@@ -118,7 +119,7 @@ public class DBmanagerFrame extends JFrame implements ActionListener {
             p3.add(p1, BorderLayout.CENTER);
             p3.add(p2, BorderLayout.SOUTH);
         }
-        if (s == "Aggiungi Città"){
+        if (Objects.equals(s, "Aggiungi Città")){
             a = "Aggiungi Città";
             AggiungiCit.setVisible(false);
             p1.add(new JLabel("Inserire nome città"));
@@ -132,7 +133,7 @@ public class DBmanagerFrame extends JFrame implements ActionListener {
             p3.add(p1, BorderLayout.CENTER);
             p3.add(p2, BorderLayout.SOUTH);
         }
-        if (s == "Cancella Attrazione"){
+        if (Objects.equals(s, "Cancella Attrazione")){
             a = "Cancella Attrazione";
             CancAttr.setVisible(false);
             p1.add(Città);
@@ -144,7 +145,7 @@ public class DBmanagerFrame extends JFrame implements ActionListener {
             p3.add(p1, BorderLayout.CENTER);
             p3.add(p2, BorderLayout.SOUTH);
         }
-        if (s == "Cancella Città"){
+        if (Objects.equals(s, "Cancella Città")){
             a = "Cancella Città";
             CancCit.setVisible(false);
             p1.add(Città);
@@ -155,7 +156,7 @@ public class DBmanagerFrame extends JFrame implements ActionListener {
             p3.add(p1, BorderLayout.CENTER);
             p3.add(p2, BorderLayout.SOUTH);
         }
-        if (s == "Suggerimenti"){
+        if (Objects.equals(s, "Suggerimenti")){
             a = "Suggerimenti";
             Suggerimenti.setVisible(false);
             p1.add(Barra);
@@ -177,13 +178,13 @@ public class DBmanagerFrame extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e){
         if (e.getSource() == Invio){
-            if(a == "Modifica Attrazione"){
+            if(Objects.equals(a, "Modifica Attrazione")){
                 String b = (String) Attrazioni.getSelectedItem();
                 String c = (String) Città.getSelectedItem();
                 Database DB = new Database("Città", "" +c, "" +b);
                 DB.UpdateDB(DB, Descript.getText());
             }
-            if(a == "Aggiungi Attrazione"){
+            if(Objects.equals(a, "Aggiungi Attrazione")){
                 String c = (String) Città.getSelectedItem();
                 Database DB = new Database("Città", "" +c, "");
                 DB.AddColumnDB(DB,NomeAttr.getText());
@@ -193,12 +194,12 @@ public class DBmanagerFrame extends JFrame implements ActionListener {
                 DB1.AddColumnDB(DB1,NomeAttr.getText());
                 DB1.AddColumnDB(DB1,"Sugg" +NomeAttr.getText());
             }
-            if(a == "Modifica Città"){
+            if(Objects.equals(a, "Modifica Città")){
                 String c = (String) Città.getSelectedItem();
                 Database DB = new Database("Città", "" +c, "GenDescript");
                 DB.UpdateDB(DB, Descript.getText());
             }
-            if(a == "Aggiungi Città"){
+            if(Objects.equals(a, "Aggiungi Città")){
                 Database DB = new Database("Città", "", "");
                 DB.AddTableDB(DB, NomeAttr.getText());
                 DB = new Database("Città", "" +NomeAttr.getText(),"GenDescript");
@@ -206,7 +207,7 @@ public class DBmanagerFrame extends JFrame implements ActionListener {
                 Database DB1 = new Database("Commenti", "", "");
                 DB1.AddTableDB(DB1, NomeAttr.getText());
             }
-            if(a == "Cancella Attrazione"){
+            if(Objects.equals(a, "Cancella Attrazione")){
                 String b = (String) Attrazioni.getSelectedItem();
                 String c = (String) Città.getSelectedItem();
                 Database DB = new Database("Città", "" +c, "" +b);
@@ -216,7 +217,7 @@ public class DBmanagerFrame extends JFrame implements ActionListener {
                 Database DB2 = new Database("Commenti", "" +c, "Sugg" +b);
                 DB1.CancColumnDB(DB2);
             }
-            if(a == "Cancella Città"){
+            if(Objects.equals(a, "Cancella Città")){
                 String c = (String) Città.getSelectedItem();
                 Database DB = new Database("Città", "" +c, "");
                 DB.CancTableDB(DB);
@@ -257,12 +258,12 @@ public class DBmanagerFrame extends JFrame implements ActionListener {
             new DBmanagerFrame("Suggerimenti");
         }
         if (e.getSource() == View){
-            if (a == "Modifica Città"){
+            if (Objects.equals(a, "Modifica Città")){
                 String c = (String) Città.getSelectedItem();
                 Database DB2 = new Database("Città", "" +c, "GenDescript");
                 Descript.setText(DB2.GetFromDB(DB2));
             }
-            else if (a == "Suggerimenti"){
+            else if (Objects.equals(a, "Suggerimenti")){
                 Database DB2 = new Database("Commenti", "" +Città.getSelectedItem(),
                         "Sugg" +Attrazioni.getSelectedItem());
                 ArrayList<String> List = new ArrayList<String>();

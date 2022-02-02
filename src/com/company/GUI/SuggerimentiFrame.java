@@ -18,20 +18,39 @@ public class SuggerimentiFrame extends JFrame implements ActionListener{
 
     public SuggerimentiFrame(String s) {
         super("Suggerimenti " +s);
-        b = s;
-        Database DB = new Database("Commenti", "Modena", "Sugg" +s);
+
         p1 = new JPanel(new GridLayout(2,1));
         p2 = new JPanel(new GridLayout(2,1));
         ptot = new JPanel(new BorderLayout(1,1));
         AreaScrittura = new JTextArea();
+        AreaSuggerimenti = new JTextArea();
+
+        if(SettingsFrame.colore == "notte"){
+            getContentPane().setBackground(Color.black);
+            p1.setBackground(Color.black);
+            p2.setBackground(Color.black);
+            ptot.setBackground(Color.black);
+            AreaSuggerimenti.setBackground(Color.black);
+            AreaSuggerimenti.setForeground(Color.white);
+        }
+        if(SettingsFrame.colore == "giorno") {
+            getContentPane().setBackground(Color.white);
+            p1.setBackground(Color.white);
+            p2.setBackground(Color.white);
+            ptot.setBackground(Color.white);
+            AreaSuggerimenti.setBackground(Color.white);
+            AreaSuggerimenti.setForeground(Color.black);
+        }
+
+        b = s;
+        Database DB = new Database("Commenti", "Modena", "Sugg" +s);
         Invio = new JButton("INVIO");
         Invio.addActionListener(this);
-
         if (DB.GetSuggerimentiFromDB(DB, LOGIN.Utente) != null){
-            AreaSuggerimenti = new JTextArea("" +DB.GetSuggerimentiFromDB(DB, LOGIN.Utente));
+            AreaSuggerimenti.setText("" +DB.GetSuggerimentiFromDB(DB, LOGIN.Utente));
         }
         else {
-            AreaSuggerimenti = new JTextArea("");
+            AreaSuggerimenti.setText("");
         }
         AreaSuggerimenti.setEditable(false);
 

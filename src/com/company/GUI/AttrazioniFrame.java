@@ -4,6 +4,7 @@ import com.company.Database;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Objects;
 
 public class AttrazioniFrame extends JFrame{
     String Text;
@@ -21,13 +22,13 @@ public class AttrazioniFrame extends JFrame{
     public AttrazioniFrame(String s){
         super("Modena-" +s);
 
-        if(SettingsFrame.colore == "notte"){
+        if(Objects.equals(SettingsFrame.colore, "notte")){
             getContentPane().setBackground(Color.black);
             panel1.setBackground(Color.black);
             Descript.setBackground(Color.black);
             Descript.setForeground(Color.white);
         }
-        if(SettingsFrame.colore == "giorno") {
+        if(Objects.equals(SettingsFrame.colore, "giorno")) {
             getContentPane().setBackground(Color.white);
             Descript.setBackground(Color.white);
             Descript.setForeground(Color.black);
